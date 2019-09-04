@@ -1,0 +1,527 @@
+﻿<Window x:Class="Ejercicio1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ejercicio1"
+        mc:Ignorable="d"
+        Title="Gestión de la tienda informática" Height="540" Width="860">
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid x:Name="inicioSesionGrid" Margin="10" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition Height="80"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label x:Name="tituloLabel" Content="Gestión de la tienda informática" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkBlue" Margin="5" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="34" FontWeight="Bold"/>
+
+            <Image Source="Imagenes\acceso.png" Grid.Row="1" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Right"/>
+
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1">
+                <Label x:Name="usuarioIniciarSesionLabel" Content="Usuario:" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox x:Name="usuarioIniciarSesionTextBox" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+            </WrapPanel>
+
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="1">
+                <Label x:Name="contrasenaIniciarSesionLabel" Content="Contraseña:" HorizontalAlignment="Left" Margin="5"/>
+                <PasswordBox x:Name="contrasenaIniciarSesionPasswordBox" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" Width="120"/>
+            </WrapPanel>
+
+            <Button x:Name="accederButton" Content="Acceder" Background="White" BorderBrush="blue" Foreground="Blue" HorizontalAlignment="Center" Margin="5" Width="75" Height="25" VerticalAlignment="Top" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Click="accederButton_Click" KeyDown="accederButton_KeyDown"/>
+
+        </Grid>
+
+        <Grid x:Name="gestionGrid" Visibility="Hidden">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="55"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="25"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Row="0" >
+                <Button x:Name="empleadosButton" Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="empleadosButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\empleados.png"/>
+                        <Label x:Name="empleadosLabel" Foreground="Blue" Content="Empleados" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="proveedoresButton" Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="proveedoresButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\proveedores.png"/>
+                        <Label x:Name="proveedoresLabel" Foreground="Blue" Content="Proveedores" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="categoriasButton" Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="categoriasButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\categorias.png"/>
+                        <Label x:Name="categoriasLabel" Foreground="Blue" Content="Categorías" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="productosButton" Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="productosButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\productos.png"/>
+                        <Label x:Name="productosLabel" Foreground="Blue" Content="Productos" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="clientesButton" Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="clientesButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\clientes.png"/>
+                        <Label x:Name="clientesLabel" Foreground="Blue" Content="Clientes" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="tpvButton" Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="tpvButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\tpv.png"/>
+                        <Label x:Name="tpvLabel" Foreground="Blue" Content="TPV" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+                <Button x:Name="cerrarSesionButton"  Background="White" BorderBrush="Blue" Margin="2" Width="115" Height="45" FontSize="12" Click="cerrarSesionButton_Click">
+                    <WrapPanel Orientation="Horizontal" Height="30">
+                        <Image Source="Imagenes\salir.png"/>
+                        <Label x:Name="cerrarSesionLabel" Foreground="Blue" Content="Salir" VerticalAlignment="Center"/>
+                    </WrapPanel>
+                </Button>
+            </WrapPanel>
+
+            <Label x:Name="bienvenidoLabel" Content="Bienviendo al gestión de la tienda informática" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="DarkBlue" Margin="5" Grid.Row="1" FontSize="34" FontWeight="Bold" Visibility="Visible"/>
+
+            <Grid x:Name="empleadosGrid" HorizontalAlignment="Center" Grid.Row="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="550"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="empleadosDataGrid" Background="White" CanUserAddRows="False" DataContext="{Binding Source=Empleados}" ColumnHeaderStyle="{StaticResource HeaderStyle}" IsReadOnly="True" Margin="5" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" SelectionChanged="empleadosDataGrid_SelectionChanged">
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=usuarioId}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Path=nombre}"/>
+                        <DataGridTextColumn Header="Apellidos" Binding="{Binding Path=apellidos}"/>
+                        <DataGridTextColumn Header="Usuario" Binding="{Binding Path=usuario}"/>
+                        <DataGridTextColumn Header="Tipo de cuenta" Binding="{Binding Path=tipoCuenta}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="crearEmpleadoButton" Content="Crear" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="crearEmpleadoButton_Click"/>
+                    <Button x:Name="modificarEmpleadoButton" Content="Modificar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="modificarEmpleadoButton_Click"/>
+                    <Button x:Name="eliminarEmpleadoButton" Content="Eliminar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="eliminarEmpleadoButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <Label x:Name="idEmpleadoLabel" Content="ID:" Margin="5"/>
+                    <TextBox x:Name="idEmpleadoTextBox" Text="{Binding Path=usuarioId, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="62"/>
+                    <Button x:Name="buscarEmpleadoButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarEmpleadoButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                    <Label x:Name="nombreEmpleadoLabel" Content="Nombre:" Margin="5"/>
+                    <TextBox x:Name="nombreEmpleadoTextBox" Text="{Binding Path=nombre, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                    <Label x:Name="apellidosEmpleadoLabel" Content="Apellidos:" Margin="5"/>
+                    <TextBox x:Name="apellidosEmpleadoTextBox" Text="{Binding Path=apellidos, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
+                    <Label x:Name="usuarioEmpleadoLabel" Content="Usuario:" Margin="5"/>
+                    <TextBox x:Name="usuarioEmpleadoTextBox" Text="{Binding Path=usuario, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+                    <Label x:Name="contrasenaEmpleadoLabel" Content="Contraseña:" Margin="5"/>
+                    <PasswordBox x:Name="contrasenaEmpleadoPasswordBox" BorderBrush="Blue" Height="23" Margin="5" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
+                    <Label x:Name="tipoCuentaEmpleadoLabel" Content="Usuario:" Margin="5"/>
+                    <ComboBox x:Name="tipoCuentaEmpleadoComboBox" Text="{Binding Path=tipoCuenta, Mode=TwoWay}" BorderBrush="Blue" Height="23" Margin="5" Width="120" Background="White">
+                        <ComboBoxItem>Administrador</ComboBoxItem>
+                        <ComboBoxItem>Empleado</ComboBoxItem>
+                    </ComboBox>
+                </WrapPanel>
+
+                <Button x:Name="limpiarEmpleadoButton" Content="Limpiar" Background="White" BorderBrush="blue" Foreground="Blue" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="85" Height="23" Grid.Column="1" Grid.Row="7" Click="limpiarEmpleadoButton_Click"/>
+
+            </Grid>
+
+            <Grid x:Name="proveedoresGrid" HorizontalAlignment="Center" Grid.Row="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="550"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="proveedoresDataGrid" CanUserAddRows="False" DataContext="{Binding Source=Proveedores}" ColumnHeaderStyle="{StaticResource HeaderStyle}" IsReadOnly="True" Margin="5" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" SelectionChanged="proveedoresDataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=proveedorId}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Path=nombreProveedor}"/>
+                        <DataGridTextColumn Header="Dirección" Binding="{Binding Path=direccionProveedor}"/>
+                        <DataGridTextColumn Header="Nombre de contacto" Binding="{Binding Path=nombreContactoProveedor}"/>
+                        <DataGridTextColumn Header="Teléfono de contacto" Binding="{Binding Path=telefonoContactoProveedor}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="crearProveedorButton" Content="Crear" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="crearProveedorButton_Click"/>
+                    <Button x:Name="modificarProveedorButton" Content="Modificar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="modificarProveedorButton_Click"/>
+                    <Button x:Name="eliminarProveedorButton" Content="Eliminar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="eliminarProveedorButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <Label x:Name="idProveedorLabel" Content="ID:" Margin="5"/>
+                    <TextBox x:Name="idProveedorTextBox" Text="{Binding Path=proveedorId, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="62"/>
+                    <Button x:Name="buscarProveedorButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarProveedorButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                    <Label x:Name="nombreProveedorLabel" Content="Nombre:" Margin="5"/>
+                    <TextBox x:Name="nombreProveedorTextBox" Text="{Binding Path=nombreProveedor, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                    <Label x:Name="direccionProveedorLabel" Content="Dirección:" Margin="5"/>
+                    <TextBox x:Name="direccionProveedorTextBox" Text="{Binding Path=direccionProveedor, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
+                    <Label x:Name="nombreContactoProveedorLabel" Content="Nombre de contacto:" Margin="5"/>
+                    <TextBox x:Name="nombreContactoProveedorTextBox" Text="{Binding Path=nombreContactoProveedor, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+                    <Label x:Name="telefonoContactoProveedorLabel" Content="Teléfono de contacto:" Margin="5"/>
+                    <TextBox x:Name="telefonoContactoProveedorTextBox" Text="{Binding Path=telefonoContactoProveedor, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <Button x:Name="limpiarProveedorButton" Content="Limpiar" Background="White" BorderBrush="blue" Foreground="Blue" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="85" Height="23" Grid.Column="1" Grid.Row="6" Click="limpiarProveedorButton_Click"/>
+
+            </Grid>
+
+            <Grid x:Name="categoriasGrid" HorizontalAlignment="Center" Grid.Row="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="550"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="categoriasDataGrid" CanUserAddRows="False" DataContext="{Binding Source=Categorias}" ColumnHeaderStyle="{StaticResource HeaderStyle}" IsReadOnly="True" Margin="5" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" SelectionChanged="categoriasDataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=categoriaId}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Path=nombre}"/>
+                        <DataGridTextColumn Header="Descripción" Binding="{Binding Path=descripcion}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="crearCategoriaButton" Content="Crear" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="crearCategoriaButton_Click"/>
+                    <Button x:Name="modificarCategoriaButton" Content="Modificar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="modificarCategoriaButton_Click"/>
+                    <Button x:Name="eliminarCategoriaButton" Content="Eliminar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="eliminarCategoriaButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <Label x:Name="idCategoriaLabel" Content="ID:" Margin="5"/>
+                    <TextBox x:Name="idCategoriaTextBox" Text="{Binding Path=categoriaId, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="62"/>
+                    <Button x:Name="buscarCategoriaButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarCategoriaButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                    <Label x:Name="nombreCategoriaLabel" Content="Nombre:" Margin="5"/>
+                    <TextBox x:Name="nombreCategoriaTextBox" Text="{Binding Path=nombre, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                    <Label x:Name="descripcionCategoriaLabel" Content="Descripción:" Margin="5"/>
+                    <TextBox x:Name="descripcionCategoriaTextBox" Text="{Binding Path=descripcion, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <Button x:Name="limpiarCategoriaButton" Content="Limpiar" Background="White" BorderBrush="blue" Foreground="Blue" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="85" Height="23" Grid.Column="1" Grid.Row="4" Click="limpiarCategoriaButton_Click"/>
+
+            </Grid>
+
+            <Grid x:Name="productosGrid" HorizontalAlignment="Center" Grid.Row="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="550"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="productosDataGrid" CanUserAddRows="False" DataContext="{Binding Source=Productos}" ColumnHeaderStyle="{StaticResource HeaderStyle}" Margin="5" IsReadOnly="True" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" SelectionChanged="productosDataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=productoId}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Path=nombre}"/>
+                        <DataGridTextColumn Header="Descripción" Binding="{Binding Path=descripcion}"/>
+                        <DataGridTextColumn Header="Precio" Binding="{Binding Path=precio, StringFormat=\{0\}€}"/>
+                        <DataGridTextColumn Header="Stock" Binding="{Binding Path=stock}"/>
+                        <DataGridTextColumn Header="Categoria" Binding="{Binding Path=categoria.nombre}"/>
+                        <DataGridTextColumn Header="Proveedor" Binding="{Binding Path=proveedor.nombreProveedor}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="crearProductoButton" Content="Crear" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="crearProductoButton_Click"/>
+                    <Button x:Name="modificarProductoButton" Content="Modificar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="modificarProductoButton_Click"/>
+                    <Button x:Name="eliminarProductoButton" Content="Eliminar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="eliminarProductoButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <Label x:Name="idProductoLabel" Content="ID:" Margin="5"/>
+                    <TextBox x:Name="idProductoTextBox" Text="{Binding Path=productoId, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="62"/>
+                    <Button x:Name="buscarProductoButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarProductoButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                    <Label x:Name="nombreProductoLabel" Content="Nombre:" Margin="5"/>
+                    <TextBox x:Name="nombreProductoTextBox" Text="{Binding Path=nombre, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                    <Label x:Name="descripcionProductoLabel" Content="Descripción:" Margin="5"/>
+                    <TextBox x:Name="descripcionProductoTextBox" Text="{Binding Path=descripcion, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
+                    <Label x:Name="precioProductoLabel" Content="Precio:" Margin="5"/>
+                    <TextBox x:Name="precioProductoTextBox" Text="{Binding Path=precio, StringFormat=\{0\}€, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+                    <Label x:Name="stockProductoLabel" Content="Stock:" Margin="5"/>
+                    <TextBox x:Name="stockProductoTextBox" Text="{Binding Path=stock, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
+                    <Label x:Name="categoriaProductoLabel" Content="Categoria:" Margin="5"/>
+                    <TextBox x:Name="categoriaProductoTextBox" Text="{Binding Path=categoria.nombre, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                    <Button x:Name="buscarCategoriaProductoButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarCategoriaProductoButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="7">
+                    <Label x:Name="proveedorProductoLabel" Content="Proveedor:" Margin="5"/>
+                    <TextBox x:Name="proveedorProductoTextBox" Text="{Binding Path=proveedor.nombreProveedor, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                    <Button x:Name="buscarProveedorProductoButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarProveedorProductoButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="8">
+                    <Label x:Name="imagenProductoLabel" Content="Imagen:" Margin="5"/>
+                    <Border BorderBrush="Blue" BorderThickness="1" Margin="5,0,0,0">
+                        <Image x:Name="imagenProductoImage" Width="100" Height="100"/>
+                    </Border>
+                    <Button x:Name="subirImagenProductoButton" Content="Subir" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="23" Click="subirImagenProductoButton_Click"/>
+                </WrapPanel>
+
+                <Button x:Name="limpiarProductoButton" Content="Limpiar" Background="White" BorderBrush="blue" Foreground="Blue" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="85" Height="23" Grid.Column="1" Grid.Row="9" Click="limpiarProductoButton_Click"/>
+
+            </Grid>
+
+            <Grid x:Name="clientesGrid" HorizontalAlignment="Center" Grid.Row="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="550"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="clientesDataGrid" CanUserAddRows="False" DataContext="{Binding Source=Clientes}" ColumnHeaderStyle="{StaticResource HeaderStyle}" Margin="5" IsReadOnly="True" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.RowSpan="10" SelectionChanged="clientesDataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Path=clienteId}"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Path=nombre}"/>
+                        <DataGridTextColumn Header="Apellidos" Binding="{Binding Path=apellidos}"/>
+                        <DataGridTextColumn Header="Dirección" Binding="{Binding Path=direccion}"/>
+                        <DataGridTextColumn Header="Teléfono" Binding="{Binding Path=telefono}"/>
+                        <DataGridTextColumn Header="E-mail" Binding="{Binding Path=email}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center">
+                    <Button x:Name="crearClienteButton" Content="Crear" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="crearClienteButton_Click"/>
+                    <Button x:Name="modificarClienteButton" Content="Modificar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="modificarClienteButton_Click"/>
+                    <Button x:Name="eliminarClienteButton" Content="Eliminar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" IsEnabled="False" Click="eliminarClienteButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
+                    <Label x:Name="idClienteLabel" Content="ID:" Margin="5"/>
+                    <TextBox x:Name="idClienteTextBox" Text="{Binding Path=clienteId, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="62"/>
+                    <Button x:Name="buscarClienteButton" Content="Buscar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Click="buscarClienteButton_Click"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
+                    <Label x:Name="nombreClienteLabel" Content="Nombre:" Margin="5"/>
+                    <TextBox x:Name="nombreClienteTextBox" Text="{Binding Path=nombre, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3">
+                    <Label x:Name="apellidosClienteLabel" Content="Apellidos:" Margin="5"/>
+                    <TextBox x:Name="apellidosClienteTextBox" Text="{Binding Path=apellidos, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4">
+                    <Label x:Name="direccionClienteLabel" Content="Dirección:" Margin="5"/>
+                    <TextBox x:Name="direccionClienteTextBox" Text="{Binding Path=direccion, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="5">
+                    <Label x:Name="telefonoClienteLabel" Content="Teléfono:" Margin="5"/>
+                    <TextBox x:Name="telefonoClienteTextBox" Text="{Binding Path=telefono, Mode=TwoWay}" VerticalContentAlignment="Center" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="6">
+                    <Label x:Name="emailClienteLabel" Content="E-mail:" Margin="5"/>
+                    <TextBox x:Name="emailClienteTextBox" Text="{Binding Path=email, Mode=TwoWay}" BorderBrush="Blue" Height="23" Margin="5" TextWrapping="Wrap" Width="120"/>
+                </WrapPanel>
+
+                <Button x:Name="limpiarClienteButton" Content="Limpiar" Background="White" BorderBrush="blue" Foreground="Blue" HorizontalAlignment="Left" Margin="5" VerticalAlignment="Top" Width="85" Height="23" Grid.Column="1" Grid.Row="7" Click="limpiarClienteButton_Click"/>
+
+            </Grid>
+
+            <Grid x:Name="tpvGrid" HorizontalAlignment="Center" Grid.Row="1" Visibility="Hidden">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="230"></ColumnDefinition>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="430"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="35"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label x:Name="categoriasListaLabel" Content="Categorías:" Grid.Row="0" Grid.Column="0"/>
+                <ListView x:Name="categoriasListView" BorderBrush="Blue" Grid.Row="1" Grid.RowSpan="6" Grid.Column="0" SelectionChanged="categoriasListView_SelectionChanged"/>
+
+                <Label x:Name="productosListaLabel" Content="Productos:" Grid.Row="0" Grid.Column="1"/>
+                <Border Margin="5,0,0,0" Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="Blue" BorderThickness="1">
+                    <WrapPanel x:Name="productosWrapPanel"/>
+                </Border>
+
+                <DataGrid x:Name="lineaPedidosDataGrid" CanUserAddRows="False" Margin="0,5,0,5" ColumnHeaderStyle="{StaticResource HeaderStyle}" IsReadOnly="True" AutoGenerateColumns="False" Grid.Row="7" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Producto" Binding="{Binding Path=producto.nombre}"/>
+                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Path=cantidad}"/>
+                        <DataGridTextColumn Header="Precio" Binding="{Binding Path=producto.precio, StringFormat=\{0\}€}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <WrapPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="totalLabel" Content="Total: 0,00€" Height="25" VerticalAlignment="Center" Grid.Column="0"/>
+                        <Button x:Name="pagarButton" Content="Pagar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="pagarButton_Click" Grid.Column="1"/>
+                        <Button x:Name="anularButton" Content="Anular" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="anularButton_Click" Grid.Column="2"/>
+                    </Grid>
+                </WrapPanel>
+
+                <WrapPanel Orientation="Horizontal" Grid.Row="8" Grid.Column="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label x:Name="clienteLabel" Content="Cliente actual:" Height="25" VerticalAlignment="Center" Grid.Column="0"/>
+                        <Button x:Name="cambiarButton" Content="Cambiar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" Width="75" Height="25" Click="cambiarButton_Click" Grid.Column="1"/>
+                    </Grid>
+
+                </WrapPanel>
+
+                <Button x:Name="eliminarButton" Content="Eliminar" Background="White" BorderBrush="blue" Foreground="Blue" Margin="5" HorizontalAlignment="Left" Width="75" Grid.Row="10" Grid.Column="2" Click="eliminarButton_Click"/>
+
+            </Grid>
+
+            <StatusBar Grid.Row="2" Background="LightBlue">
+                <StatusBarItem x:Name="estadoEmpleadoStatusBar" HorizontalContentAlignment="Left"/>
+                <StatusBarItem x:Name="estadoFechaStatusBar" HorizontalContentAlignment="Right"/>
+            </StatusBar>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

@@ -1,0 +1,33 @@
+﻿<Window x:Class="Ejercicio1.CategoriasWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ejercicio1"
+        mc:Ignorable="d"
+       Title="Consultar categorías" Height="300" Width="300">
+    <Window.Resources>
+        <Style x:Key="HeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightBlue"/>
+            <Setter Property="BorderBrush" Value="Blue"/>
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="MinHeight" Value="30"/>
+            <Setter Property="Padding" Value="5"/>
+        </Style>
+    </Window.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Label x:Name="consultarCategoriasLabel" Content="Consultar:" Grid.Row="0"/>
+        <DataGrid x:Name="consultarCategoriasDataGrid" CanUserAddRows="False" DataContext="{Binding Source=Categorias}" ColumnHeaderStyle="{StaticResource HeaderStyle}" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="consultarCategoriaDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Path=categoriaId}"/>
+                <DataGridTextColumn Header="Nombre" Binding="{Binding Path=nombre}"/>
+                <DataGridTextColumn Header="Apellidos" Binding="{Binding Path=descripcion}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
